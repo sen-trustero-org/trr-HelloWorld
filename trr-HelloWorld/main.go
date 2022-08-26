@@ -19,7 +19,7 @@ const (
 // which will be used in the UI when activating the receptor.
 // This is what will be returned in the GetCredentialObj call
 type Receptor struct {
-	//credentials
+	FirstName   string `trustero:"display:Primary User;placeholder:First Name"`
 }
 
 // Set the name of the receptor in the const declaration above
