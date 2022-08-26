@@ -3,6 +3,7 @@
 package main
 
 import (
+	"github.com/rs/zerolog/log"
 	"github.com/trustero/api/go/receptor_sdk"
 	"github.com/trustero/api/go/receptor_sdk/cmd"
 	"github.com/trustero/api/go/receptor_v1"
@@ -46,7 +47,9 @@ func (r *Receptor) GetCredentialObj() (credentialObj interface{}) {
 // API call like GET org name. If the credentials are not valid,
 // return a relevant error message
 func (r *Receptor) Verify(credentials interface{}) (ok bool, err error) {
-
+	c := credentials.(*Receptor)
+	log.Info().Msgf("verify: checking credentials for %s", c.FirstName)
+	ok = (err == nil)
 	return
 }
 
