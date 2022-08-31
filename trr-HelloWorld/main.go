@@ -22,6 +22,13 @@ type Receptor struct {
 	FirstName   string `trustero:"display:Primary User;placeholder:First Name"`
 }
 
+// Defines the structure of a single row of our "Translation" evidence
+type TrusteroTranslationRow struct {
+    LangId           string     `trustero:"id:"`
+    Language         string     `trustero:"display:Language;order:1"`
+    Phrase           string     `trustero:"display:Phrase;order:2"`
+}
+
 // Set the name of the receptor in the const declaration above
 // This will let the receptor inform Trustero about itself
 func (r *Receptor) GetReceptorType() string {
