@@ -75,8 +75,41 @@ func (r *Receptor) Discover(credentials interface{}) (svcs []*receptor_v1.Servic
 // Report will often make the same API calls made in the Discover call, but it
 // will additionally create evidences with the data returned from the API calls
 func (r *Receptor) Report(credentials interface{}) (evidences []*receptor_sdk.Evidence, err error) {
+	c := credentials.(*Receptor)
+	report := receptor_sdk.NewReport()
 
-	return
+	caption := serviceName1 + " Hello Translations"
+	description := "List of translations of the term 'Hello, [user]'"
+	evidence := receptor_sdk.NewEvidence(
+		serviceName1,
+		"Language",
+		caption,
+        description)
+
+	// Note the API call made and results returned for English
+	evidence.AddSource("https://translate.google.com/?sl=auto&tl=en&text=Hello&op=translate", "Hello")
+	evidence.AddRow(TrusteroTranslationRow{
+		LangId:           "en",
+		Language:         "English",
+		Phrase:           "Hello, " + c.FirstName,
+	})
+	// Note the API call made and results returned for Italian
+	evidence.AddSource("https://translate.google.com/?sl=auto&tl=it&text=Hello&op=translate", "Ciao")
+	evidence.AddRow(TrusteroTranslationRow{
+		LangId:           "it",
+		Language:         "Italian",
+		Phrase:           "Ciao, " + c.FirstName,
+	})
+	// Note the API call made and results returned for German
+	evidence.AddSource("https://translate.google.com/?sl=auto&tl=de&text=Hello&op=translate", "Hallo")
+	evidence.AddRow(TrusteroTranslationRow{
+		LangId:           "de",
+		Language:         "German",
+		Phrase:           "Hallo, " + c.FirstName,
+	})
+
+	report.AddEvidence(evidence)
+	return report.Evidences, err
 }
 
 func main() {
