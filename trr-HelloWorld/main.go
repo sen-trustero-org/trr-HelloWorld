@@ -57,8 +57,12 @@ func (r *Receptor) Verify(credentials interface{}) (ok bool, err error) {
 // about how many Service Entity Instances are in use. If at any point this
 // function runs into an error, log that error and continue
 func (r *Receptor) Discover(credentials interface{}) (svcs []*receptor_v1.ServiceEntity, err error) {
+    services := receptor_sdk.NewServiceEntities()
+	services.AddService(serviceName1, "Language", "English", "en")
+	services.AddService(serviceName1, "Language", "German", "de")
+	services.AddService(serviceName1, "Language", "Italian", "it")
 
-	return
+	return services.Entities, err
 }
 
 // Report will often make the same API calls made in the Discover call, but it
