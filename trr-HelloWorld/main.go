@@ -11,8 +11,7 @@ import (
 
 const (
 	receptorName = "trr-custom"
-	serviceName1 = "CHANGE ME"
-	serviceName2 = "CHANGE ME"
+	serviceName1 = "Translate"
 )
 
 // This struct holds the credentials the receptor needs to authenticate with the
@@ -33,7 +32,7 @@ func (r *Receptor) GetReceptorType() string {
 // This will let the receptor inform Trustero about itself
 // Feel free to add or remove services as needed
 func (r *Receptor) GetKnownServices() []string {
-	return []string{serviceName1, serviceName2}
+	return []string{serviceName1}
 }
 
 // This will return Receptor struct defined above when the receptor is asked to
